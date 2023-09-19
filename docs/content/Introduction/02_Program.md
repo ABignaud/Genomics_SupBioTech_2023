@@ -8,7 +8,7 @@ permalink: /Introduction/Program/
 ---
 ## Session 1
 ### Lectures:
-- Introduction of the lecture
+- General introduction of the lecture
 
 ### Practical:
 - WSL configuration

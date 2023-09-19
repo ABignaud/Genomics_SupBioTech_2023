@@ -24,4 +24,6 @@ permalink: /Session02/
     > Learn to do control the quality of sequencing data using *fastQC*, 
     *fastq screen*, *multiQC*.
 
+--- 
+
 [[Quiz]](Quiz_01.pdf)
