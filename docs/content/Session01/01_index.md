@@ -18,5 +18,6 @@ permalink: /Session01/
 --- 
 
 [[Quiz]](Quiz_01.pdf)
-[[Quiz]](Quiz_01_correction.pdf)
+
+[[Quiz correction]](Quiz_01_correction.pdf)
 
