@@ -1,0 +1,4 @@
+.vscode
+Gemfile.lock
+docs/_site
+static/Exercices/*.html
