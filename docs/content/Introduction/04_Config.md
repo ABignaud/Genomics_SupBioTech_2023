@@ -22,6 +22,7 @@ ls
 
 Congratulations you have the data !
 
+---
 ## Install IGV 
 
 For the Session 2,
@@ -31,6 +32,7 @@ executable and run it:
 
 https://software.broadinstitute.org/software/igv/download
 
+---
 ## Install docker-desktop
 
 This was a first attempt to have the same environnement but it's really, really painful to use and not that simple to use so don't use that. If you still want to use that and very bold and want a painful interface you can play with that, it should work. 

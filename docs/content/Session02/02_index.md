@@ -9,10 +9,10 @@ permalink: /Session02/
 ## Presentations
 
 - **\[20 minutes\]** Lecture 1 - Introduction to Genomics
-[[PDF]](1_Genommics.pdf)
+[[PDF]](01_Genommics.pdf)
 
 - **\[30 minutes\]** Lecture 2 - Introduction to Next Generation Sequencing (NGS)
-[[PDF]](2_NGS.pdf)
+[[PDF]](02_NGS.pdf)
 
 ---
 
