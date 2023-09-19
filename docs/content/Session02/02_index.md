@@ -1,7 +1,7 @@
 ---
-title: "Day 01"
+title: "Day 02"
 layout: page
-permalink: /Session01/
+permalink: /Session02/
 ---
 
 ---

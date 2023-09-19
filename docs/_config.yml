@@ -18,13 +18,13 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Transcriptomics Sup'BioTech 2023
+title: Genomics Sup'BioTech 2023
 email: amaury.bignaud@pasteur.fr
 description: >- # this means to ignore newlines until "baseurl:"
   This repository contains instructions related to the 2023 Sup'BioTech course 
-  entitled "Transcriptomics".
-baseurl: "/Transcriptomics_SupBioTech_2023/" # the subpath of your site, e.g. /blog
-url: "https://abignaud.github.io/Transcriptomics_SupBioTech_2023/" # the base hostname & protocol for your site, e.g. http://example.com
+  entitled "Genomics".
+baseurl: "/Genomics_SupBioTech_2023/" # the subpath of your site, e.g. /blog
+url: "https://abignaud.github.io/Genomics_SupBioTech_2023/" # the base hostname & protocol for your site, e.g. http://example.com
 # domain: "" # if you want to force HTTPS, specify the domain without the http at the start, e.g. example.com
 github_username: ABignaud
 
