@@ -47,7 +47,21 @@ bash Anaconda3-2023.07-2-MacOSX-arm64.sh
 - Congratulations `conda` is installed !
 
 ---
+## Install your conda environnement
 
+- Run the initializer to add `conda` as a command (Openning a new terminal would have done the job too)
+- Go in the genomics_supbiotech_2023 folder 
+- Get the `yaml` environment file from the `github` repository
+- Install the conda environment
+
+```sh
+source .bashrc 
+cd genomics_supbiotech_2023
+wget https://github.com/ABignaud/Genomics_SupBioTech_2023/raw/main/genomics.yaml
+conda env create -f genomics.yaml
+conda activate genomics
+```
+---
 ## Install IGV 
 
 For the Session 2,
