@@ -6,19 +6,20 @@ permalink: /Session02/
 
 ---
 
+
 ## Presentations
 
-- **\[20 minutes\]** Lecture 1 - Introduction to Genomics
+- **\[30 minutes\]** Lecture 1 - Introduction to Genomics
 [[PDF]](01_Genommics.pdf)
 
-- **\[30 minutes\]** Lecture 2 - Introduction to Next Generation Sequencing (NGS)
+- **\[45 minutes\]** Lecture 2 - Introduction to Next Generation Sequencing (NGS)
 [[PDF]](02_NGS.pdf)
 
 ---
 
 ## Exercises
 
--  **\[1h\]** Practical 1 - Assessing sequencing data quality.
+-  **\[90 minutes\]** Practical 1 - Assessing sequencing data quality.
     [[HTML](QC)]
 
     > Learn to do control the quality of sequencing data using *fastQC*, 
@@ -26,4 +27,6 @@ permalink: /Session02/
 
 --- 
 
-[[Quiz]](Quiz_01.pdf)
+[[Quiz]](Quiz_02.pdf)
+
+[[Quiz correction]](Quiz_02_correction.pdf)
