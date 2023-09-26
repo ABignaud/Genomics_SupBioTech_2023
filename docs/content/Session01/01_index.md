@@ -7,13 +7,13 @@ permalink: /Session01/
 ---
 
 ## Presentations
-- General introduction of the lecture.
+- **\[20 minutes\]** General introduction of the lecture.
 
 ---
 
 ## Exercises
-- Set up config.
-- Initiation to the basic command line of Linux. Tutorial can be found at the [following link](https://www.geeksforgeeks.org/basic-shell-commands-in-linux/amp/).
+- **\[60 minutes\]** Set up config.
+- **\[90 minutes\]** Initiation to the basic command line of Linux. Tutorial can be found at the [following link](https://www.geeksforgeeks.org/basic-shell-commands-in-linux/amp/).
 
 --- 
 
