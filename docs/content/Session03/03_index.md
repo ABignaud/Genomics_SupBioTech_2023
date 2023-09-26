@@ -5,18 +5,16 @@ permalink: /Session03/
 ---
 
 ---
-
 ## Presentations
 
 - **\[30 minutes\]** Lecture 3 - Sequence alignment
 [[PDF]](03_Sequence_Alignment.pdf)
 
 ---
-
 ## Exercises
 
 -  **\[45 minutes\]** Practical 1 - Assessing sequencing data quality.
-    [[HTML](/Session02/QC)]
+    [[HTML](../Session02/QC)]
 
     > Learn to do control the quality of sequencing data using *fastQC*, 
     *fastq screen*, *multiQC*.

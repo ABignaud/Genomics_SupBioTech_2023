@@ -5,8 +5,6 @@ permalink: /Session02/
 ---
 
 ---
-
-
 ## Presentations
 
 - **\[30 minutes\]** Lecture 1 - Introduction to Genomics
@@ -16,7 +14,6 @@ permalink: /Session02/
 [[PDF]](02_NGS.pdf)
 
 ---
-
 ## Exercises
 
 -  **\[90 minutes\]** Practical 1 - Assessing sequencing data quality.
