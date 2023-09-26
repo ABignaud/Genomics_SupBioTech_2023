@@ -1,0 +1,47 @@
+pre {
+    background-color: #e3e3e3
+}
+
+#content pre.sourceCode {
+    background-color: #f8f8f8;
+    border: 1px solid black;
+}
+
+#content pre.sourceCode.r::before {
+    font-size: small;
+    font-weight: 200;
+    color: rgb(90, 1, 1);
+    content: "{R} \a";
+    margin: -10px -10px 10px -3px;
+    display: block;
+    /* text-align: end; */
+}
+
+#content pre.sourceCode.sh::before {
+    font-size: small;
+    font-weight: 200;
+    color: rgb(0, 31, 78);
+    content: "{sh} \a";
+    margin: -10px -10px 10px -3px;
+    display: block;
+    /* text-align: end; */
+}
+
+.bash>span::before {
+    font-size: small;
+    font-weight: 200;
+    color: rgb(0, 31, 78);
+    content: "> ";
+}
+
+.r>span::before {
+    font-size: small;
+    font-weight: 200;
+    color: rgb(90, 1, 1);
+    content: "> ";
+}
+
+summary {
+    color: #ff7f00;
+    font-weight: bold
+}

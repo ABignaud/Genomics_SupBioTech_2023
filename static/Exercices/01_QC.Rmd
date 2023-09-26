@@ -1,0 +1,368 @@
+
+---
+title: "Assessing sequencing quality"
+output: 
+    rmdformats::readthedown: 
+        highlight: tango
+        preserve_yaml: true
+        df_print: tibble
+        toc_depth: 4
+        css: ./assets/custom.css
+---
+
+In this practice session, we go through the process of assessing the quality of 
+sequencing raw data. The goal of this analysis is to detect potential 
+experimental issues before to do further informatics analysis.
+
+Even if the quality check step is not necessary for further analysis. This step 
+is crucial as it can help to detect potential problems which can altered the 
+final output. Furthermore, we will see that some quality issues can be corrected
+to avoid having artifacts in the output.
+
+For simplicity purposes, we will be using specialized tools command line in this
+practice session, but all data manipulation steps can be performed or modified
+using a scripting language. The tools that will be needed here are:
+
+* [fastqc](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+* [fastqscreen](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/)
+* [multiqc](https://multiqc.info/)
+
+For the analysis we will use data from *Bacillus subtilis* culture infected by 
+its phage SPP1 RNA-seq libraries. The reads are subsampled to accelerate the 
+quality check. The reference genome from this library is the YB886 strain from
+*Bacillus subtilis* and its phage SPP1.
+
+All the data are available in the `genomics_supbiotech_2023/` folder.
+
+## The file formats
+
+Here we will manipulate two kinds of file:
+
+### Fasta files
+These files contain the genome sequence data. Each sequence is introduced by a 
+name. The line containing the name starts by a `>`, the name cannot contain any
+space or `>`, and usually special characters should be avoided. Then you can 
+have features of the sequence such as length on the same line separated by 
+spaces. On the next line there is the nucleotide sequence with `ATGCN` 
+characters.
+
+*Note: the file extension for fasta file can be `.fasta`, `.fa` or `.fna`.*
+
+> What is the meaning of the 'N' character in a fasta file ?
+
+<details><summary>**Answer:**</summary>
+<p>
+The N character in a fasta file is for an undetermined base. Usually, they are 
+used once there is an assembly issues and a sequence is unknown between two 
+known sequences. To inform other users that they are a missing sequences 'N' 
+characters are added in the genome sequence.
+</p>
+</details>
+<br>
+
+### Fastq files 
+A fastq file has four line-separated fields per sequence:
+- Field 1 begins with a '@' character and is followed by a sequence identifier 
+and an optional description (like a fasta title line).
+- Field 2 is the raw sequence letters.
+- Field 3 begins with a '+' character and is optionally followed by the same 
+sequence identifier (and any description) again.
+- Field 4 encodes the quality values for the sequence in Field 2, and must 
+contain the same number of symbols as letters in the sequence.
+
+*Note: the file extension for fastq file can be `.fastq`, `.fq`.*
+
+Before launching some software we will try to read the different files. To do 
+that you can use the `cd` bash command to change of directory:
+
+
+```{sh eval = FALSE}
+cd genomics_supbiotech_2023
+```
+
+To do list all the files in a folder you can use `ls`.
+
+```{sh eval = FALSE}
+ls
+```
+
+If you want to see what is inside another folder, just add the path after `ls`.
+
+```{sh eval = FALSE}
+ls reference
+```
+
+Or this equivalent:
+
+```{sh eval = FALSE}
+cd reference
+ls
+```
+
+To go back to the parent directory you can use `..` which corresponds to the 
+parent directory.
+
+```{sh eval = FALSE}
+cd ..
+```
+
+> Open the fasta file. To do that we will use the `head` command which
+displays the first ten rows of a file
+
+```{sh eval = FALSE}
+head reference/YB886.fa
+```
+
+<details><summary>**Show output**</summary>
+<p>
+```
+>manual_scaffold_1 
+GTGCTTCTCTCAAAGCGACTACTTAATAGTAACATTTTTAGTTAACTAGGTCAATACTTT
+TTTGAAAAAGTTTTTACTAGTCATAATGGTCATGCTTGTGTCTTTAAAAAGACAACAGAA
+ATGATTATACCATAATTTTTATGACTGTAAAGGGTTATGACACAAAAAAGCGCAGCTATT
+TCAGCTGCGCTTTTTTTCACACTTCTTCTTGTTCTTCTTCATTCTCATCTTCTTCGTTTT
+TCTCAACTAAAGCTACTGTAGCAACATGCTCTTCTTCTGCCATTCTGATGAGACGCACAC
+CTTGAGTGACACGTCCGGTGATGGAGATATCATTGATGTCCATTCTGATGAGTACGCCGC
+TAGCTGTAATAATCATTAGATCCTCTTCACCTTTAGTAGCTTTCACTGCTACTAGTTGGC
+CGTTGTTCTCGGTGATTTTCGCTGTTTTGAGTCCTTTTCCGCCCCGGCTTTGGGTTCTGT
+ACTCTTCAGCAGGAGTTCGTTTTCCGTACCCTTTTTCAGTTACGATAAGGACGTGTGATT
+```
+</p>
+</details>  
+
+> Try to open the fastq file now.
+
+```{sh eval = FALSE}
+head fastq/Bacillus_infection_T0_R1.fq.gz
+```
+
+<details><summary>**Clue**</summary>
+<p>
+It won't work as the file is compressed.
+
+To see the uncompressed lines you can use the `zcat` command and pipe `|` it into the `head`:
+
+```{sh eval = FALSE}
+zcat fastq/Bacillus_infection_T0_R1.fq.gz | head 
+```
+
+```
+@NS500446:543:HNM5TBGX7:1:11101:11655:1062 1:N:0:ATCACG
+TTATGNTAGCAACAACATCATCTGCTANTTCTANTATTGATGANACCCTTA
++
+AAAAA#EEEEEEEEEEEEEEAAEAEEE#EEAEE#EEAEEEEEA#EEE6E/E
+@NS500446:543:HNM5TBGX7:1:11101:26029:1063 1:N:0:ATCACG
+ACTGGNCGGAGCTATCCTTGTAGTATCNGCTGCNGATGGCCCANTGCCACA
++
+AAAAA#EEEEEEEEEEEEEEEEEEEEE#AEEEA#EAEEEEEE<#AEEEEE/
+@NS500446:543:HNM5TBGX7:1:11101:13459:1063 1:N:0:ATCACG
+CTGGTNTGGGTGAACTTCACCTTGATANCATTGNTGACCGTATNAAACGCG
+```
+
+You can see now the file organization with the four fields per sequences. The 
+reason the fastq file are compressed is they have usually millions of reads. To 
+save space the files are usually compressed.
+
+To compressed, uncompressed files you can use `gzip`, `gunzip` respectively.
+</p>
+</details>
+
+
+## The Quality Checks
+
+## FastQC
+
+### Looking at the fastqc documentation
+
+FastQC is the most used software to control the quality of high throughput
+sequence data.
+
+So let's go on their 
+[website](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) to discuss
+more about what it does.
+
+Let's look at [good illumina report example](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/good_sequence_short_fastqc.html) !
+
+If you go down on the pages you will see the 
+[documentation](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/)
+
+> According to the documentation what may be the reason of the bad sequencing 
+quality in the bad illumina sequencing report ?
+
+<details><summary>**Answer**</summary>
+<p>
+The most common reason for warnings and failures in this module is a general
+degradation of quality over the duration of long runs. In general sequencing
+chemistry degrades with increasing read length and for long runs you may find
+that the general quality of the run falls to a level where a warning or error is
+triggered.
+
+If the quality of the library falls to a low level then the most common remedy
+is to perform quality trimming where reads are truncated based on their average
+quality. For most libraries where this type of degradation has occurred you will
+often be simultaneously running into the issue of adapter read-through so a
+combined adapter and quality trimming step is often employed. 
+</p>
+</details>
+
+> According to the documentation what may be the reason of a GC content 
+warning ?
+
+<details><summary>**Answer**</summary>
+<p>
+Warnings in this module usually indicate a problem with the library. Sharp peaks
+on an otherwise smooth distribution are normally the result of a specific 
+contaminant (adapter dimers for example), which may well be picked up by the 
+overrepresented sequences module. Broader peaks may represent contamination with 
+a different species. 
+</p>
+</details>
+
+> What warning is expected to be raised by RNA-seq library ?
+
+<details><summary>**Answer**</summary>
+<p>
+In RNA-Seq libraries sequences from different transcripts will be present at 
+wildly different levels in the starting population. In order to be able to 
+observe lowly expressed transcripts it is therefore common to greatly 
+over-sequence high expressed transcripts, and this will potentially create large
+set of duplicates. This will result in high overall duplication in this test, 
+and will often produce peaks in the higher duplication bins. This duplication 
+will come from physically connected regions, and an examination of the 
+distribution of duplicates in a specific genomic region will allow the 
+distinction between over-sequencing and general technical duplication, but these 
+distinctions are not possible from raw fastq files. 
+</p>
+</details>
+
+### Running your own fastqc
+
+Let's now try to run your own `fastqc`. Normally the algorithm has been 
+installed in your conda environment. To have the documentation in your terminal,
+you can launch the documentation (it will work with most of the software):
+
+```{sh eval = FALSE}
+fastqc --help
+```
+
+To create a new directory you can use the `mkdir` command from bash.
+
+```{sh eval = FALSE}
+mkdir -p results/fastqc
+```
+
+> Base on the help launch your own command:
+
+<details><summary>**Show code**</summary>
+<p>
+```{sh eval = FALSE}
+fastqc --outdir results/fastqc fastq/Bacillus_infection_T0_R1.fq.gz 
+fastqc --outdir results/fastqc fastq/Bacillus_infection_T0_R2.fq.gz  
+fastqc --outdir results/fastqc fastq/Bacillus_infection_T10_R1.fq.gz fastq/Bacillus_infection_T10_R2.fq.gz
+```
+</p>
+</details>
+
+Now let's have a look at our own fastqc. Open the your file explorer and open 
+the folder where you work. You will see there is a `results/fastqc` directory. 
+Inside it there are the fastqc report in html format, you can open them using 
+any internet browser.
+
+> What do you see on the report ?
+
+<details><summary>**Answer**</summary>
+<p>
+- Longer forward reads (51bp) than reverse reads (35bp).
+- No issue of sequence quality
+- We have an expected biased fragmentation, especially strong in reverse reads
+which is expected in RNAseq.
+- Weird distributions in Reverse GC content with a scale stuff, adpaters
+contaminations ?
+- No N sequences and read length ok.
+- Small duplication levels whic is expected for RNA-seq.
+- No Adapters content.
+- Small overepresented GGGGGGGGGGGG reads in reverse librairies which is due to
+ not enough DNA output.
+</p>
+</details>
+
+## FastQ Screen
+
+Another tools to assess library quality is `fastq screen`. The goal of this tool
+is not to assess the fastq quality but the sequences which are in it. The idea 
+is mainly to see if there is the right genome in your sequences and not a 
+contamination from another genome or others usual DNA contaminants.
+
+Here is their 
+[website page](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/) 
+
+> Try to launch the `fastq_screen` command.
+
+<details><summary>**Clue**</summary>
+<p>
+```{sh eval = FALSE}
+fastq_screen --help
+```
+</p>
+</details>
+
+<details><summary>**Clue 2**</summary>
+<p>
+You will need to give the fasta genome indexed. To give them they are config 
+file availabe at `reference/fastq_screen.conf`. 
+</p>
+</details>
+
+<details><summary>**Show code**</summary>
+<p>
+```{sh eval = FALSE}
+mkdir -p results/fastqscreen
+fastq_screen --outdir results/fastq_screen --conf reference/fastq_screen.conf --force fastq/Bacillus_infection_T0_R1.fq.gz fastq/Bacillus_infection_T0_R2.fq.gz fastq/Bacillus_infection_T10_R1.fq.gz fastq/Bacillus_infection_T10_R2.fq.gz 
+```
+
+As for the fastqc report, you can open the fastq-screen report using your file
+explorer directly.
+
+</p>
+</details>
+
+> What did you see in the output ?
+
+<details><summary>**Answer**</summary>
+<p>
+You saw that the fastqscreen is telling you that he just used 100,000 reads. 
+Indead to reduce the computational time it's just do the alignment of a subset 
+of reads. 
+
+Then you can see that there are no contamination from adapters, phiX, vectors or
+*Escherichia coli*. You can also see that the phage concentration
+increases during the infection.
+
+Finally, the reverse reads are not mapping well, the reason is that there are 
+shorter with an adapter sequence at the beginning. We will see tomorrow that 
+they actually map.
+</p>
+</details>
+
+## Bonus: MultiQC
+
+This is just software to make a nice report from several QC software. 
+[Here](https://multiqc.info/) is the documentation.
+
+> Try to launch `multiqc`
+
+<details><summary>**Show code**</summary>
+<p>
+```{sh eval = FALSE}
+mkdir -p results/multiqc
+multiqc --title 'Bacillus infection' --outdir results/multiqc --module fastqc --module fastq_screen fastq results/fastqc results/fastq_screen/
+```
+</p>
+</details>
+
+As an output you will have nice report with the aggregated results from all 
+previous QC, that you can open using your file
+
+There are some other metrics that must be checked but most of them needs further
+treatment of the data, and we will see them in the next sessions.
+
