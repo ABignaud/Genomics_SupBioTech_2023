@@ -3,9 +3,8 @@ layout: default
 permalink: /Introduction/Config/
 ---
 
----
 # Config
-
+---
 ## Unzipped the archive with the dataset
 
 Download the archive file from the link you have received by email.
@@ -23,12 +22,36 @@ ls
 Congratulations you have the data !
 
 ---
+## Install conda
+
+```sh
+# Using Linux (or Linus subsystem on Windows):
+wget https://repo.anaconda.com/archive/Anaconda3-2023.07-2-Linux-x86_64.sh
+bash Anaconda3-2023.07-2-Linux-x86_64.sh
+
+# Without the M1 chip (your MAC is more than one year old - use this one if you don't know):
+wget https://repo.anaconda.com/archive/Anaconda3-2023.07-2-MacOSX-x86_64.sh
+bash Anaconda3-2023.07-2-MacOSX-x86_64.sh
+
+# With the M1 chip (your MAC is ~ one year old):
+wget https://repo.anaconda.com/archive/Anaconda3-2023.07-2-MacOSX-arm64.sh
+bash Anaconda3-2023.07-2-MacOSX-arm64.sh
+```
+
+- Then press `ENTER`
+- Read all the terms of utilisation (or maintain enter to skip it)
+- Accept the terms of License by writing `yes` and press `ENTER`
+- Press `ENTER` to confirm the location of installation
+- Wait during the installation
+- Accept to install the initializer by writing `yes` and press `ENTER`
+- Congratulations `conda` is installed !
+
+---
+
 ## Install IGV 
 
 For the Session 2,
-[Integrative Genomics Viewer (IGV)](https://software.broadinstitute.org/software/igv/) 
-will be needed. To isntall it go to the following page to download the 
-executable and run it:
+[Integrative Genomics Viewer (IGV)](https://software.broadinstitute.org/software/igv/) will be needed. To install it go to the following page to download the executable according to your system and run it:
 
 https://software.broadinstitute.org/software/igv/download
 
