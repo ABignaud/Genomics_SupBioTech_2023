@@ -22,30 +22,32 @@ ls
 Congratulations you have the data !
 
 ---
-## Install conda
+## Install minimamba
 
 ```sh
-# Using Linux (or Linus subsystem on Windows):
-wget https://repo.anaconda.com/archive/Anaconda3-2023.07-2-Linux-x86_64.sh
-bash Anaconda3-2023.07-2-Linux-x86_64.sh
-
-# Without the M1 chip (your MAC is more than one year old - use this one if you don't know):
-wget https://repo.anaconda.com/archive/Anaconda3-2023.07-2-MacOSX-x86_64.sh
-bash Anaconda3-2023.07-2-MacOSX-x86_64.sh
-
-# With the M1 chip (your MAC is ~ one year old):
-wget https://repo.anaconda.com/archive/Anaconda3-2023.07-2-MacOSX-arm64.sh
-bash Anaconda3-2023.07-2-MacOSX-arm64.sh
+# Linux Intel (x86_64):
+curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+# Linux ARM64:
+curl -Ls https://micro.mamba.pm/api/micromamba/linux-aarch64/latest | tar -xvj bin/micromamba
+# Linux Power:
+curl -Ls https://micro.mamba.pm/api/micromamba/linux-ppc64le/latest | tar -xvj bin/micromamba
+# macOS Intel (x86_64):
+curl -Ls https://micro.mamba.pm/api/micromamba/osx-64/latest | tar -xvj bin/micromamba
+# macOS Silicon/M1 (ARM64):
+curl -Ls https://micro.mamba.pm/api/micromamba/osx-arm64/latest | tar -xvj bin/micromamba
 ```
 
-- Then press `ENTER`
-- Read all the terms of utilisation (or maintain enter to skip it)
-- Accept the terms of License by writing `yes` and press `ENTER`
-- Press `ENTER` to confirm the location of installation
-- Wait during the installation
-- Accept to install the initializer by writing `yes` and press `ENTER`
-- Congratulations `conda` is installed !
+```sh
+# Linux/bash:
+./bin/micromamba shell init -s bash -p ~/micromamba  # this writes to your .bashrc file
+# sourcing the bashrc file incorporates the changes into the running session.
+# better yet, restart your terminal!
+source ~/.bashrc
 
+# macOS/zsh:
+./micromamba shell init -s zsh -p ~/micromamba
+source ~/.zshrc
+```
 ---
 ## Install your conda environnement
 
@@ -55,11 +57,10 @@ bash Anaconda3-2023.07-2-MacOSX-arm64.sh
 - Install the conda environment
 
 ```sh
-source .bashrc 
 cd genomics_supbiotech_2023
 wget https://github.com/ABignaud/Genomics_SupBioTech_2023/raw/main/genomics.yaml
-conda env create -f genomics.yaml
-conda activate genomics
+mamba env create -f genomics.yaml
+mamba activate genomics
 ```
 ---
 ## Install IGV 
