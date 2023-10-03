@@ -28,28 +28,26 @@ permalink: /Introduction/Program/
 ---
 ## Session 3
 **27/09/2023**
-### Lectures:
-- The sequence alignment process
-
 ### Practical:
 - Checking the quality of raw sequencing data (continue)
-- Sequence alignment 
-
 
 ---
 ## Session 4
 **02/10/2023**
 ### Lectures:
-- The RNA-seq experiment
+- The sequence alignment process
 
 ### Practical:
+- Checking the quality of raw sequencing data (small discussion)
+- Sequence alignment (cutadpat and bowtie2)
 
 ---
 ## Session 5
 **04/10/2023**
 ### Lectures:
-- The ChIP-seq experiment
+- Transcriptomics
 ### Practical:
+- Sequence alignment (samtools and IGV)
 
 ---
 ## Session 6
@@ -57,7 +55,6 @@ permalink: /Introduction/Program/
 ### Lectures:
 
 ### Practical:
-
 ---
 ## Session 7
 **11/10/2023**
@@ -73,12 +70,8 @@ permalink: /Introduction/Program/
 ---
 ## Session 9
 **06/11/2023**
-### Lectures:
-
-### Practical:
+### Practical - Exam
 ---
 ## Session 10
 **22/11/2023**
-### Lectures:
-
-### Practical:
+### Practical - Exam
