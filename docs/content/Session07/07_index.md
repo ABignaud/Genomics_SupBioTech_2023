@@ -8,7 +8,7 @@ permalink: /Session07/
 ## Presentations
 
 - **\[60 minutes\]** Lecture 4 - Introduction to Single Cell RNAseq 
-[[PDF]](6_Single_Cell_RNAseq.pdf)
+[[PDF]](6_Single_cell_RNAseq.pdf)
 
 --- 
 

@@ -8,7 +8,7 @@ permalink: /Session06/
 ## Presentations
 
 - **\[60 minutes\]** Lecture 5 - DESeq2 : A software to normalize RNA sequencing counts data. 
-[[PDF]](5_DESEQ.pdf)
+[[PDF]](5_DESeq.pdf)
 
 ---
 ## Exercises
