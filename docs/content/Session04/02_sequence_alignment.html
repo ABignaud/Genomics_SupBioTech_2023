@@ -1,6 +1,6 @@
 ---
 layout: null
-permalink: /Session03/SequenceAlignment
+permalink: /Session04/SequenceAlignment
 ---
 
 <!DOCTYPE html>
@@ -10346,7 +10346,8 @@ permalink: /Session03/SequenceAlignment
           align the reads on the reference genome. The most known algorithms for mapping are <code>bowtie2</code>,
           <code>bwa</code> and <code>minimap</code>. There are also some others aligners more specific to RNA-seq such
           as <code>STAR</code> or <code>salmon</code>. For bacteria where the genomes are small with no repeated
-          regions, there are not necessary.</p>
+          regions, there are not necessary.
+        </p>
         <p>In this practical we will use <a href="https://bowtie-bio.sourceforge.net/bowtie2/manual.shtml">bowtie2</a>
           as <code>bwa</code> and <code>minimap</code> are not well suited for very short reads (&lt;100bp).</p>
         <p>The aligner algorithm needs to index the fasta. An index will be like a dictionnary where the sequence
@@ -10376,7 +10377,8 @@ permalink: /Session03/SequenceAlignment
         <p><br></p>
         <p>Once the index is done we can use the <code>bowtie2</code> command to map the reads. We will use the
           <code>--very-sensitive</code> method. You can look at the <a
-            href="https://bowtie-bio.sourceforge.net/bowtie2/manual.shtml">documentation</a>:</p>
+            href="https://bowtie-bio.sourceforge.net/bowtie2/manual.shtml">documentation</a>:
+        </p>
         <div class="sourceCode" id="cb6">
           <pre
             class="sourceCode sh"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="ex">bowtie2</span> --help</span></code></pre>
@@ -10487,7 +10489,8 @@ NS500446:543:HNM5TBGX7:1:11101:19648:1065       163     manual_scaffold_1       
           </blockquote>
           <p>The sam file is quite heavy, as for the fastq we are used to work with compressed files. We will at the
             same time filter the mapping reads, sort them and index them using <code>samtools</code>. The
-            <code>bam</code> file is the compressed version of <code>sam</code>.</p>
+            <code>bam</code> file is the compressed version of <code>sam</code>.
+          </p>
           <details>
             <summary><strong>Bonus:</strong></summary>
             <p>
@@ -10619,7 +10622,8 @@ Commands:
         <h2>Visualizing the alignment using IGV</h2>
         <p>Now let’s visualize our tracks using IGV. In IGV you can load the fasta genome and then the sorted
           <code>bam</code>, <code>bigwig</code> or <code>gff</code>. The <code>gff</code> is the genome annotation file
-          with the genes position.</p>
+          with the genes position.
+        </p>
         <p>For this step, you will have to download IGV on your own personal computer. Here is the page where the
           installation file is available for each OS (Windows, Mac or Linux).</p>
         <p><a href="https://software.broadinstitute.org/software/igv/download"
