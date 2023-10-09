@@ -18,9 +18,3 @@ permalink: /Session05/
 
     > Utilization of `bowtie2`, `samtools`, `deeptools` to generate the alignement tracks
     > Visualization of the alignment using `IGV`
-
---- 
-
-[[Quiz]](Quiz_04.pdf)
-
-[[Quiz correction]](Quiz_04_correction.pdf)
