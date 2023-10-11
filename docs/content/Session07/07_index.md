@@ -13,7 +13,7 @@ permalink: /Session07/
 ## Exercises
 
 - **\[60 minutes\]** Practical 3 - Introduction to DESeq2 analysis.
-    [[HTML](DESeq)]
+    [[HTML](DESeq2)]
 
     > Utilization of `DESeq2`, `featuresCounts`
 
