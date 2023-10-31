@@ -13,7 +13,7 @@ permalink: /Session05/
 ---
 ## Exercises
 
-- **\[60 minutes\]** Practical 2 - Sequence alignment & introduction to IGV.
+- **\[105 minutes\]** Practical 2 - Sequence alignment & introduction to IGV.
     [[HTML](/Genomics_SupBioTech_2023/Session04/SequenceAlignment)]
 
     > Utilization of `bowtie2`, `samtools`, `deeptools` to generate the alignement tracks

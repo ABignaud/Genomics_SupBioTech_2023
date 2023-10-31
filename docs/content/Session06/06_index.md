@@ -9,7 +9,7 @@ permalink: /Session06/
 
 - **\[60 minutes\]** Lecture 5 - DESeq2 : A software to normalize RNA sequencing counts data. 
 [[PDF]](5_DESeq.pdf)
-- **\[60 minutes\]** Lecture 6 - Overview of the bacteriophage biology. 
+- **\[45 minutes\]** Lecture 6 - Overview of the bacteriophage biology. 
 [[PDF]](6_Phage_overview.pdf)
 
 ---
